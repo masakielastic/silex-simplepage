@@ -78,9 +78,9 @@ Simple Page Provider for Silex
 API
 ---
 
-GET /api/pages
-GET /api/pages?name={name}
-POST /api/pages
-PUT /api/pages/{id}
-PATCH /api/pages/{id}
-DELETE /api/pages/{id}
+ * GET /api/pages
+ * GET /api/pages?name={name}
+ * POST /api/pages
+ * PUT /api/pages/{id}
+ * PATCH /api/pages/{id}
+ * DELETE /api/pages/{id}
