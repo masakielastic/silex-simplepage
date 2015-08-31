@@ -70,7 +70,7 @@ class SimplePageControllerProvider implements ControllerProviderInterface
             return $app->json(['msg' => 'ok']);
         })->method('PUT|PATCH');
 
-        $controllers->delete('/api/pages/{id}', function(Application $app, Request $request, $id) {
+        $controllers->delete('/pages/{id}', function(Application $app, Request $request, $id) {
             $count = $app['db']->executeUpdate('DELETE FROM page WHERE id = ?', [$id]);
 
             return $app->json(['msg' => 'ok']);
