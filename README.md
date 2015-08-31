@@ -23,7 +23,7 @@ Simple Page Provider for Silex
                 "reference": "master"
             },
             "autoload": {
-                "psr-0": {"SimplePage": "src/"}
+                "psr-4": { "Masakielastic\\Silex\\": "src/" }
             }
         }
     }
@@ -39,11 +39,9 @@ Simple Page Provider for Silex
 コントローラープロバイダーを次のように Silex のアプリケーションにマウントします。
 
 ```php
-require_once __DIR__.'/../vendor/autoload.php';
-
 use Silex\Application;
 use Silex\Provider;
-use Symfony\Component\HttpFoundation\Request;
+use Masakielastic\Silex\SimplePageControllerProvider;
 
 $app = new Application();
 $app->register(new Provider\DoctrineServiceProvider());
@@ -51,7 +49,7 @@ $app['db.options'] = [
     'driver'   => 'pdo_sqlite',
     'path'     => __DIR__.'/app.db'
 ];
-$app->mount('/api', new SimplePage\PageControllerProvider());
+$app->mount('/api', new SimplePageControllerProvider());
 
 $app->run();
 ```
@@ -62,17 +60,17 @@ $app->run();
 $app->get('/api/reset', function(Application $app) {
 
     $sqls = [
-        'drop table page',
-        'CREATE TABLE page('.
+        'DROP TABLE IF EXISTS page',
+        'CREATE TABLE IF NOT EXISTS page('.
         '  id INTEGER PRIMARY KEY AUTOINCREMENT,'.
         '  name TEXT NOT NULL,'.
         '  title TEXT,'.
         '  body TEXT,'.
         '  unique(name)'.
         ');',
-        "INSERT INTO page(name, title, body) values('index', 'ホームの見出し', 'ホームの本文');",
-        "INSERT INTO page(name, title, body) values('about', '自己紹介の見出し', '自己紹介の本文');",
-        "INSERT INTO page(name, title, body) values('contact', '問い合わせの見出し', '問い合わせの本文');"
+        "INSERT INTO page(name, title, body) VALUES('index', 'ホームの見出し', 'ホームの本文');",
+        "INSERT INTO page(name, title, body) VALUES('about', '自己紹介の見出し', '自己紹介の本文');",
+        "INSERT INTO page(name, title, body) VALUES('contact', '問い合わせの見出し', '問い合わせの本文');"
     ];
 
     foreach ($sqls as $sql) {
