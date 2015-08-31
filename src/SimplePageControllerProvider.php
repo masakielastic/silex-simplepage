@@ -1,11 +1,11 @@
 <?php
-namespace SimplePage;
+namespace Masakielastic\Silex;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class PageControllerProvider implements ControllerProviderInterface
+class SimplePageControllerProvider implements ControllerProviderInterface
 {
     public function connect(Application $app)
     {
